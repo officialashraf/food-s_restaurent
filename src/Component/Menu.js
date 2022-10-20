@@ -1,7 +1,6 @@
 
 //import { useNavigate } from 'react-router-dom';
-import Navbar from 'react-bootstrap/Navbar'
-import Container from 'react-bootstrap/Container'
+
 import Button from 'react-bootstrap/Button';
 import './Signup.css'
 import './Menu.css'
@@ -26,15 +25,7 @@ function Menu() {
   };
     return (
       <>
-  <Navbar bg="primary" variant="dark" width='100%'>
-        <Container>
-          <Navbar.Brand href="#home">
-          <i class="fa-solid fa-utensils mx-3"></i>
-           FOOD RESTAURENT
-          </Navbar.Brand>
-          <i class="fa-solid fa-cart-shopping  text-light"></i>
-        </Container>
-      </Navbar>
+  
   
       <h1> MENU </h1>
       <div className='tut' >

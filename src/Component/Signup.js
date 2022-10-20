@@ -1,73 +1,86 @@
-
-import './Signup.css'
-import Navbar from 'react-bootstrap/Navbar'
-import Container from 'react-bootstrap/Container'
 import React from 'react';
-import Form from 'react-bootstrap/Form';
-import { useNavigate} from "react-router-dom";
-import './Loginup.js'
+import { Formik, Form } from 'formik';
+import { TextField } from './textfield'; 
+import * as Yup from 'yup';
+// import Loginup from './Loginup';
+import { useNavigate } from "react-router-dom";
+import './Signup.css'
 
 
+const Signup = () => {
+  const validate = Yup.object({
+    fullName: Yup.string()
+      .max(15, 'Must be 15 characters or less')
+      .required('Required')
+      .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
+    email: Yup.string()
+      .email('Email is invalid')
+      .required('Email is required'),
+    password: Yup.string()
+      .min(6, 'Password must be at least 6 charaters')
+      .required('Password is required')
+  })
 
-function Signup() {
+
   const navigate = useNavigate();
+  const navigateRes = () => {
 
-  const handleClick = () => {
-    
-    navigate('/Loginup');
-  };
-  const handClick = () => {
-    
     navigate('/Welcom');
   };
-   
-    return (
-      <>
-  <Navbar bg="primary" variant="dark">
-        <Container>
-          <Navbar.Brand href="#home">
-          <i class="fa-solid fa-utensils mx-3"></i>
-           FOOD RESTAURENT
-          </Navbar.Brand>
-        </Container>
-      </Navbar>
-      <nav>
-      
-    <Form>
-    <Form.Label>  SIGNUP HERE!</Form.Label>
-    <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Full Name</Form.Label>
-        <Form.Control type="name" placeholder="Enter name" />
-        </Form.Group>
+  const handleRes = () => {
+
+    navigate('/');
+  };
+
+  // const resetAllFields = (resetForm, setFieldValue) => {
+  //   resetForm();
+  // };
   
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
-    
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
-  <br/>
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
-      </Form.Group>
-      
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-      <button onClick={handClick}  type="submit">
-        Submit
-      </button>
-      <p>You Have Already Signiup Click Here !</p>
-      <button onClick={handleClick}  > LOGIN</button>
-      
-    
-    </Form>
-    </nav>
-      </>
-    );
-  }
+
+    //const sweets = options.map((data)=>data.label)
   
-  export default Signup;
+//console.log("options",options.map((data)=>data.label))
+
+  return (
+    <Formik
+      initialValues={{
+        fullName:'',
+        email: '',
+        password: '',
+      }}
+    
+      validationSchema={validate}
+      onSubmit={(values) => {
+        console.log(values)
+        alert("Form is validated! Submitting the form...");
+      }}
+
+      children={(props) => {
+        //console.log('=======props======', props)
+        const { values } = props;
+        return (
+          <div>
+            <h1 className="my-4 font-weight-bold .display-4">Sign Up</h1>
+
+            <Form align="center">
+            <TextField label="Full Name" name="fullName" type="text" />
+              <TextField label="Email" name="email" type="email" />
+              <TextField label="password" name="password" type="password" />
+              
+
+              
+
+              <button className='btn1' type="submit" onClick={navigateRes} >Create Account</button>
+              {/* <button className='btn1'  type="reset" onClick={() => resetAllFields(resetForm, setFieldValue)}>Reset</button> */}
+              
+              <p  onClick={handleRes}>Have Already a Account</p>
+
+            </Form>
+
+          </div>
+        )
+      }}
+    />
+  )
+}
+export default Signup;

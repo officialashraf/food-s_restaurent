@@ -1,5 +1,15 @@
- nav form  {
+ div form  {
   width:500px;
   display :block;
   margin:auto;
+}
+p{
+  text-align: center;
+  color: blue;
+}
+.btn1 {
+  width: 500px;
+  background-color: blue;
+  border-radius: 5px;
+  color: white;
 }
